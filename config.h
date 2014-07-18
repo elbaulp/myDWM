@@ -27,14 +27,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",  NULL,       NULL,       0,            False,       -1 },
-	{ "Pidgin",   NULL,       NULL,       0,            True,        -1 },
-	{ "Skype",    NULL,       NULL,       0,            True,        -1 },
-	{ "Kio_uiserver", NULL,   NULL,       0,            True,        -1 },
-	{ "Xchat",    NULL,       NULL,       1,            True,        -1 },
-	{ "Hexchat",  NULL,       NULL,       1,            True,        -1 },
-	{ "Jitsi",    NULL,       NULL,       1,            True,        -1 },
+	/* class                instance    title       tags mask     isfloating   monitor */
+    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
+    { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
 };
 
 /* layout(s) */
