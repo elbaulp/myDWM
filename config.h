@@ -1,10 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*";//"-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
+static const char font[]            = "-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"; //"-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*";//"-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
+static const char normfgcolor[]     = "#00ff00";
 static const char selbordercolor[]  = "#ff0000";
 static const char selbgcolor[]      = "#005577";
 static const char selfgcolor[]      = "#eeeeee";
@@ -61,6 +61,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
+static const char *chgwall[]  = { "/home/hkr/Dropbox/wall_aleatorio.sh", NULL};
 
 #include "toggleview_focus.c"
 #include "moveresize.c"
@@ -141,6 +142,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Return, focusmaster,    {0} },
 	{ MODKEY,                       XK_Left,   shifttags,      {.i = -1} },
 	{ MODKEY,                       XK_Right,  shifttags,      {.i = +1} },
+    { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },            
 };
 
 /* button definitions */
