@@ -6,5 +6,5 @@ total_run_times 0
 use_spacer none
 
 TEXT
-$mpd_smart :: ${cpu cpu1}% / ${cpu cpu2}% / ${cpu cpu3}% / ${cpu cpu4}%  :: ${acpitemp}c :: $memperc% ($mem) :: ${downspeed wlan0}K/s ${upspeed wlan0}K/s :: ${time %D | %k.%M}
+ ${cpu cpu1}% / ${cpu cpu2}%   $memperc% ($mem)   ${downspeed eth1} ${upspeed eth1}   ${time %D | %k.%M}
 
