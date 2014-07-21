@@ -3,5 +3,5 @@
     Name=Dwm-personalized
     Comment=Dynamic window manager
     Exec=dwm-personalized
-    Icon=dwm
+    Icon=/home/hkr/Desarrollo/dwm/my_dwm/dwm.png
     Type=XSession

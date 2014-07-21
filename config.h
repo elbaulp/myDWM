@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"; //"-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*";//"-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
+static const char font[]            = "-*-ohsnap.icons-bold-r-normal-*-11-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#00ff00";
@@ -17,7 +17,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const Bool systraypinningfailfirst = True;   /* True: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
-static const Bool topbar            = True;     /* False means bottom bar */
+static const Bool topbar            = False;     /* False means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
