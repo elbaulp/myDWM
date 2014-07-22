@@ -169,7 +169,7 @@ drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const cha
     for(i = len; i && i > len - 3; buf[--i] = '.');
 
   char *copy = strdup(buf);
-  char *delim = "\x01\x02";
+  char *delim = "\x01\x02\x03\x04";
   char *res = strtok(buf, delim);
   unsigned long color;
   while (res) {
@@ -179,15 +179,20 @@ drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const cha
       color = colors[0];
     else if (deli == '\x02')
       color = colors[1];
+    else if (deli == '\x03')
+      color = colors[2];
+    else if (deli == '\x04')
+      color = colors[3];
     else
-      color = 0xffffff;
+      color = 0xbbbbbb;
 
     XSetForeground(drw->dpy, drw->gc, color);
     if(drw->font->set)
       XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty, res, strlen(res));
     else
       XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, res, strlen(res));
-    ww = TEXTW(res);
+
+    ww = TEXTW(res) - 11; // Deduct width that takes \x01.. characters
     tx += ww;
     res = strtok(0, delim);
   }
