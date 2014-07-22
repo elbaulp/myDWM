@@ -2,9 +2,13 @@
 
 /* appearance */
 static const char font[]            = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" "," "-*-ohsnap.icons-medium-r-normal-*-11-*-*-*-*-*-*-*";
+static const unsigned long colors[] = {
+    0xff0000,   /* \x01 */
+    0x00ff00,   /* \x02 */
+};
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#00ff00";
+static const char normfgcolor[]     = "#bbbbbb";
 static const char selbordercolor[]  = "#ff0000";
 static const char selbgcolor[]      = "#005577";
 static const char selfgcolor[]      = "#eeeeee";

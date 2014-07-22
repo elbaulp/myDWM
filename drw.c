@@ -7,6 +7,9 @@
 #include "drw.h"
 #include "util.h"
 
+#define TEXTW(X)                (drw_font_getexts_width(drw->font, X, strlen(X)) + drw->font->h)
+
+
 Drw *
 drw_create(Display *dpy, int screen, Window root, unsigned int w, unsigned int h) {
 	Drw *drw = (Drw *)calloc(1, sizeof(Drw));
@@ -137,6 +140,58 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x+1, y+1, dx+1, dx+1);
 	else if(empty)
 		XDrawRectangle(drw->dpy, drw->drawable, drw->gc, x+1, y+1, dx, dx);
+}
+
+void
+drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, const unsigned long *colors) {
+  char buf[256];
+  int i, tx, ty, th, len, olen, ww;
+  Extnts tex;
+
+  if(!drw || !drw->scheme)
+    return;
+  XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->rgb);
+  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
+  if(!text || !drw->font)
+    return;
+  olen = strlen(text);
+  drw_font_getexts(drw->font, text, olen, &tex);
+  th = drw->font->ascent + drw->font->descent;
+  ty = y + (h / 2) - (th / 2) + drw->font->ascent;
+  tx = x + (h / 2);
+  /* shorten text if necessary */
+  for(len = MIN(olen, sizeof buf); len && (tex.w > w - tex.h || w < tex.h); len--)
+    drw_font_getexts(drw->font, text, len, &tex);
+  if(!len)
+    return;
+  memcpy(buf, text, len);
+  if(len < olen)
+    for(i = len; i && i > len - 3; buf[--i] = '.');
+
+  char *copy = strdup(buf);
+  char *delim = "\x01\x02";
+  char *res = strtok(buf, delim);
+  unsigned long color;
+  while (res) {
+    /* Figure out what delimiter was used */
+    char deli = copy[res - buf + strlen(res)];
+    if (deli == '\x01')
+      color = colors[0];
+    else if (deli == '\x02')
+      color = colors[1];
+    else
+      color = 0xffffff;
+
+    XSetForeground(drw->dpy, drw->gc, color);
+    if(drw->font->set)
+      XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty, res, strlen(res));
+    else
+      XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, res, strlen(res));
+    ww = TEXTW(res);
+    tx += ww;
+    res = strtok(0, delim);
+  }
+  free(copy);
 }
 
 void

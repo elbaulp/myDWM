@@ -913,7 +913,9 @@ drawbar(Monitor *m) {
 		x = xx;
 		w = m->ww - xx;
 	}
-	drw_text(drw, x, 0, w, bh, stext, 0);
+
+	drw_colored_st(drw, x, 0, w, bh, stext, colors);
+
 	if((w = x - xx) > bh) {
 		x = xx;
 		if(m->sel) {
