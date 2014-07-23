@@ -18,7 +18,6 @@ static const Bool systraypinningfailfirst = True;   /* True: if pinning fails, d
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = False;     /* False means bottom bar */
-
 static const unsigned long colors[] = {
     0xbbbbbb,   // \x01
     0xdb6794,   // \x02

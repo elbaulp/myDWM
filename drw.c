@@ -175,7 +175,7 @@ drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, char text
                     text[k], strlen(text[k]));
     else
       XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, text[k], strlen(text[k]));
-    tx += TEXTW(text[k]) - 11;
+    tx += TEXTW(text[k]) - TEXTW("\x0");
   }
 }
 
