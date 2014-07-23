@@ -1,0 +1,4 @@
+myDWM
+=====
+
+Personal Fork of DWM, It has two branches, master that is as the original dwm and has a simple status color patch, and myconfig, that as its name point, is my personal config of dwm
