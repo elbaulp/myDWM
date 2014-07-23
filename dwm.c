@@ -885,7 +885,7 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   char *copy = strdup(text);
   char cleanBuf[strlen(text)];
   memset(cleanBuf, 0, strlen(cleanBuf));
-  char *delim = "\x01\x02";
+  char *delim = "\x01\x02\x03\x04";
   char *res = strtok(copy, delim);
   strcat(tokens[0], res);
   strcat(cleanBuf, res);
@@ -900,9 +900,13 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
     if (deli == '\x01')
       color_queue[c] = colors[0];
     else if (deli == '\x02')
+      color_queue[c] = colors[1];
+    else if (deli == '\x03')
       color_queue[c] = colors[2];
+    else if (deli == '\x04')
+      color_queue[c] = colors[3];
     else
-      color_queue[c] = 0x0000ff;
+      color_queue[c] = 0xff0000;
     c++;
     res = strtok(0, delim);
     if (res){
@@ -942,7 +946,6 @@ drawbar(Monitor *m) {
 	x += w;
 	xx = x;
 
-	// TODO parse text here, and get list of tokens
   unsigned long color_queue[50];
   memset(color_queue,0, sizeof(unsigned long) * 50);
   char tokens[256][256];
@@ -950,7 +953,6 @@ drawbar(Monitor *m) {
   for (int i = 0; i < 256; i++)
     memset(tokens[i],0,sizeof(char) * 256);
 
-  w = TEXTW(stext);
 	parsestatus(stext, color_queue, tokens);
 
   w = TEXTW(stext);
@@ -963,16 +965,9 @@ drawbar(Monitor *m) {
     x = xx;
     w = m->ww - xx;
   }
-
-  XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->rgb);
-  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, w, bh);
   xxx = x;
 
-  for (int k = 0; color_queue[k]; k++){
-    w = TEXTW(tokens[k]);
-    drw_colored_st(drw, x, 0, w, bh, tokens[k], color_queue[k]);
-    x += w;
-  }
+  drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
 
 	if((w = xxx - xx) > bh) {
 		x = xx;

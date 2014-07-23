@@ -143,35 +143,40 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 }
 
 void
-drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, const unsigned long color) {
+drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, char text[][256], const unsigned long *color, const char *ptext) {
   char buf[256];
   int i, tx, ty, th, len, olen;
   Extnts tex;
 
   if(!drw || !drw->scheme)
     return;
-//  XSetForeground(drw->dpy, drw->gc, /*drw->scheme->bg->rgb*/ color);
-//  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
+  XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->rgb);
+  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
   if(!text || !drw->font)
     return;
-  olen = strlen(text);
-  drw_font_getexts(drw->font, text, olen, &tex);
+  olen = strlen(ptext);
+  drw_font_getexts(drw->font, ptext, olen, &tex);
   th = drw->font->ascent + drw->font->descent;
   ty = y + (h / 2) - (th / 2) + drw->font->ascent;
   tx = x + (h / 2);
   /* shorten text if necessary */
   for(len = MIN(olen, sizeof buf); len && (tex.w > w - tex.h || w < tex.h); len--)
-    drw_font_getexts(drw->font, text, len, &tex);
+    drw_font_getexts(drw->font, ptext, len, &tex);
   if(!len)
     return;
-  memcpy(buf, text, len);
+  memcpy(buf, ptext, len);
   if(len < olen)
     for(i = len; i && i > len - 3; buf[--i] = '.');
-  XSetForeground(drw->dpy, drw->gc, color);
-  if(drw->font->set)
-    XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty, buf, len);
-  else
-    XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, buf, len);
+
+  for (int k = 0; color[k]; k++) {
+    XSetForeground(drw->dpy, drw->gc, color[k]);
+    if (drw->font->set)
+      XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty,
+                    text[k], strlen(text[k]));
+    else
+      XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, text[k], strlen(text[k]));
+    tx += TEXTW(text[k]) - 11;
+  }
 }
 
 void
