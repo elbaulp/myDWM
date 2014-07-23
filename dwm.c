@@ -277,6 +277,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void parsestatus(char *text, unsigned long *color_queue, char tokens[][256]);
 
 /* variables */
 static Systray *systray = NULL;
@@ -879,8 +880,44 @@ dirtomon(int dir) {
 }
 
 void
+parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
+
+  char *copy = strdup(text);
+  char cleanBuf[strlen(text)];
+  memset(cleanBuf, 0, strlen(cleanBuf));
+  char *delim = "\x01\x02";
+  char *res = strtok(copy, delim);
+  strcat(tokens[0], res);
+  strcat(cleanBuf, res);
+  int i = 1;
+  int c = 0;
+
+  while (res) {
+
+    /* Figure out what delimiter was used */
+    // Thanks to http://stackoverflow.com/a/12460511/1612432
+    char deli = text[res - copy + strlen(res)];
+    if (deli == '\x01')
+      color_queue[c] = colors[0];
+    else if (deli == '\x02')
+      color_queue[c] = colors[2];
+    else
+      color_queue[c] = 0x0000ff;
+    c++;
+    res = strtok(0, delim);
+    if (res){
+      strcat(tokens[i++], res);
+      strcat(cleanBuf, res);
+    }
+  }
+  free(copy);
+  strncpy(text, cleanBuf, strlen(cleanBuf));
+  text[strlen(cleanBuf)] = '\0';
+}
+
+void
 drawbar(Monitor *m) {
-	int x, xx, w;
+	int x, xx, xxx, w;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
 
@@ -904,19 +941,40 @@ drawbar(Monitor *m) {
 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
 	x += w;
 	xx = x;
-	w = TEXTW(stext);
-	x = m->ww - w;
-	if(showsystray && m == systraytomon(m)) {
-		x -= getsystraywidth();
-	}
-	if(x < xx) {
-		x = xx;
-		w = m->ww - xx;
-	}
 
-	drw_colored_st(drw, x, 0, w, bh, stext, colors);
+	// TODO parse text here, and get list of tokens
+  unsigned long color_queue[50];
+  memset(color_queue,0, sizeof(unsigned long) * 50);
+  char tokens[256][256];
 
-	if((w = x - xx) > bh) {
+  for (int i = 0; i < 256; i++)
+    memset(tokens[i],0,sizeof(char) * 256);
+
+  w = TEXTW(stext);
+	parsestatus(stext, color_queue, tokens);
+
+  w = TEXTW(stext);
+  x = m->ww - w;
+
+  if(showsystray && m == systraytomon(m)) {
+    x -= getsystraywidth();
+  }
+  if(x < xx) {
+    x = xx;
+    w = m->ww - xx;
+  }
+
+  XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->rgb);
+  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, 0, w, bh);
+  xxx = x;
+
+  for (int k = 0; color_queue[k]; k++){
+    w = TEXTW(tokens[k]);
+    drw_colored_st(drw, x, 0, w, bh, tokens[k], color_queue[k]);
+    x += w;
+  }
+
+	if((w = xxx - xx) > bh) {
 		x = xx;
 		if(m->sel) {
 			drw_setscheme(drw, m == selmon ? &scheme[SchemeSel] : &scheme[SchemeNorm]);

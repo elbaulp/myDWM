@@ -143,15 +143,15 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 }
 
 void
-drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, const unsigned long *colors) {
+drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const char *text, const unsigned long color) {
   char buf[256];
-  int i, tx, ty, th, len, olen, ww;
+  int i, tx, ty, th, len, olen;
   Extnts tex;
 
   if(!drw || !drw->scheme)
     return;
-  XSetForeground(drw->dpy, drw->gc, drw->scheme->bg->rgb);
-  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
+//  XSetForeground(drw->dpy, drw->gc, /*drw->scheme->bg->rgb*/ color);
+//  XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
   if(!text || !drw->font)
     return;
   olen = strlen(text);
@@ -167,36 +167,11 @@ drw_colored_st(Drw *drw, int x, int y, unsigned int w, unsigned int h, const cha
   memcpy(buf, text, len);
   if(len < olen)
     for(i = len; i && i > len - 3; buf[--i] = '.');
-
-  char *copy = strdup(buf);
-  char *delim = "\x01\x02\x03\x04";
-  char *res = strtok(buf, delim);
-  unsigned long color;
-  while (res) {
-    /* Figure out what delimiter was used */
-    char deli = copy[res - buf + strlen(res)];
-    if (deli == '\x01')
-      color = colors[0];
-    else if (deli == '\x02')
-      color = colors[1];
-    else if (deli == '\x03')
-      color = colors[2];
-    else if (deli == '\x04')
-      color = colors[3];
-    else
-      color = 0xbbbbbb;
-
-    XSetForeground(drw->dpy, drw->gc, color);
-    if(drw->font->set)
-      XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty, res, strlen(res));
-    else
-      XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, res, strlen(res));
-
-    ww = TEXTW(res) - 11; // Deduct width that takes \x01.. characters
-    tx += ww;
-    res = strtok(0, delim);
-  }
-  free(copy);
+  XSetForeground(drw->dpy, drw->gc, color);
+  if(drw->font->set)
+    XmbDrawString(drw->dpy, drw->drawable, drw->font->set, drw->gc, tx, ty, buf, len);
+  else
+    XDrawString(drw->dpy, drw->drawable, drw->gc, tx, ty, buf, len);
 }
 
 void
