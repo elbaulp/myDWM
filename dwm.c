@@ -889,6 +889,7 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
 
   char delim[NUMCOLORS+1];
 
+  /* Thanks to http://stackoverflow.com/a/24931903/1612432 */
   for (int i = 0; i < NUMCOLORS; ++i)
       delim[i] = i + 1;
   /* Terminates as string */
