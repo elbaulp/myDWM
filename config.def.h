@@ -14,12 +14,12 @@ static const unsigned long colors[] = {
 static const char font[]            = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" "," "-*-ohsnap.icons-medium-r-normal-*-11-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#ff0000";
+static const char normfgcolor[]     = "#54ebff";
+static const char selbordercolor[]  = "#52f799";
 static const char selbgcolor[]      = "#005577";
 static const char selfgcolor[]      = "#eeeeee";
 static const char floatnormbordercolor[] = "#885599";
-static const char floatselbordercolor[]  = "#ff0000";
+static const char floatselbordercolor[]  = "#52f799";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -30,7 +30,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = False;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "Dev", "Web", "Trm", "4", "5", "6", "Snd", "8", "Dwn" };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -38,8 +38,12 @@ static const Rule rules[] = {
    *  WM_NAME(STRING) = title
    */
   /* class                instance    title       tags mask     isfloating   monitor */
-    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
     { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
+    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
+    { "Eclipse",            NULL,       NULL,       1 << 0,       False,       -1},
+    { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
+    { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
+    { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
 };
 
 /* layout(s) */
@@ -72,6 +76,10 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
 static const char *chgwall[]  = { "/home/hkr/Dropbox/wall_aleatorio.sh", NULL};
+static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
+static const char *printcmd[] = { "xfce4-screenshooter", NULL};
+static const char *foxcmd[]   = { "firefox", NULL};
+
 
 #include "toggleview_focus.c"
 #include "moveresize.c"
@@ -86,6 +94,10 @@ static Key keys[] = {
   /* modifier                     key        function        argument */
   { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
   { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+  { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },
+  { MODKEY,                       XK_e,      spawn,          {.v = idecmd} },
+  { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = foxcmd} },
+  { NULL,                         XK_Print,  spawn,          {.v = printcmd} },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -152,7 +164,6 @@ static Key keys[] = {
   { MODKEY|ControlMask,           XK_Return, focusmaster,    {0} },
   { MODKEY,                       XK_Left,   shifttags,      {.i = -1} },
   { MODKEY,                       XK_Right,  shifttags,      {.i = +1} },
-    { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },
 };
 
 /* button definitions */
