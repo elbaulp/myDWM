@@ -7,3 +7,6 @@ NOTE
 ====
 
 The patch only works with dwmStatus, you can get mine here (https://github.com/algui91/myDWMstatus)
+
+![](./screenshot.png)
+
