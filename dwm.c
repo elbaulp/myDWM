@@ -902,8 +902,8 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   while (res) {
     /* Figure out what delimiter was used */
     // Thanks to http://stackoverflow.com/a/12460511/1612432
-    char deli = text[res - copy + strlen(res)];
-    color_queue[i-1] = colors[(int) deli];
+    int deli = text[res - copy + strlen(res)] - 1;
+    color_queue[i-1] = colors[deli];
     res = strtok(0, delim);
     if (res){
       strcat(tokens[i++], res);
