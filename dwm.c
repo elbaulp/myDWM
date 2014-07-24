@@ -898,24 +898,12 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   strcat(tokens[0], res);
   strcat(cleanBuf, res);
   int i = 1;
-  int c = 0;
 
   while (res) {
-
     /* Figure out what delimiter was used */
     // Thanks to http://stackoverflow.com/a/12460511/1612432
     char deli = text[res - copy + strlen(res)];
-    if (deli == '\x01')
-      color_queue[c] = colors[0];
-    else if (deli == '\x02')
-      color_queue[c] = colors[1];
-    else if (deli == '\x03')
-      color_queue[c] = colors[2];
-    else if (deli == '\x04')
-      color_queue[c] = colors[3];
-    else
-      color_queue[c] = 0xff0000;
-    c++;
+    color_queue[i-1] = colors[(int) deli];
     res = strtok(0, delim);
     if (res){
       strcat(tokens[i++], res);
