@@ -882,10 +882,18 @@ dirtomon(int dir) {
 void
 parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
 
+  // TODO move variables that can to main in order to not recreated them
   char *copy = strdup(text);
   char cleanBuf[strlen(text)];
   memset(cleanBuf, 0, strlen(cleanBuf));
-  char *delim = "\x01\x02\x03\x04";
+
+  char delim[NUMCOLORS+1];
+
+  for (int i = 0; i < NUMCOLORS; ++i)
+      delim[i] = i + 1;
+  /* Terminates as string */
+  delim[NUMCOLORS] = '\0';
+
   char *res = strtok(copy, delim);
   strcat(tokens[0], res);
   strcat(cleanBuf, res);

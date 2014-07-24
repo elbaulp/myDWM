@@ -1,6 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+#define NUMCOLORS 7
+static const unsigned long colors[] = {
+    0xbbbbbb,   // \x01
+    0xdb6794,   // \x02
+    0xef9c3a,   // \x03
+    0xa4bc74,   // \x04
+    0x99FF99,   // Good \x05
+    0xFF6600,   // Warning \x06
+    0xC63333,   // Caution \x07
+};
 static const char font[]            = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" "," "-*-ohsnap.icons-medium-r-normal-*-11-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
@@ -18,12 +28,6 @@ static const Bool systraypinningfailfirst = True;   /* True: if pinning fails, d
 static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = False;     /* False means bottom bar */
-static const unsigned long colors[] = {
-    0xbbbbbb,   // \x01
-    0xdb6794,   // \x02
-    0xef9c3a,   // \x03
-    0xa4bc74,   // \x04
-};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
