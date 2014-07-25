@@ -3,7 +3,7 @@
 /* appearance */
 #define NUMCOLORS 7
 static const unsigned long colors[] = {
-    0xbbbbbb,   // \x01
+    0x54ebff,   // \x01
     0xdb6794,   // \x02
     0xef9c3a,   // \x03
     0xa4bc74,   // \x04
