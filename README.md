@@ -10,7 +10,8 @@ The patch only works with dwmStatus, you can get mine here (https://github.com/a
 
 TODO
 ====
-Fix status bar blinking when performin some actions, like focusstack
+- Fix status bar blinking when performin some actions, like focusstack
+- Integrate colors with ClrScheme scheme[SchemeLast]
 
 ![](./screenshot.png)
 
