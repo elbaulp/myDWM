@@ -30,7 +30,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = False;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "Dev", "Web", "Trm", "4", "5", "6", "Snd", "8", "Dwn" };
+static const char *tags[] = { "Dev", "Web", "Trm", "Thu", "5", "6", "Snd", "8", "Dwn" };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -38,12 +38,13 @@ static const Rule rules[] = {
    *  WM_NAME(STRING) = title
    */
   /* class                instance    title       tags mask     isfloating   monitor */
-    { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
-    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
     { "Eclipse",            NULL,       NULL,       1 << 0,       False,       -1},
-    { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
+    { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
     { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
+    { "Thunar",             NULL,       NULL,       1 << 3,       False,       -1},
+    { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
+    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
 };
 
 /* layout(s) */
@@ -79,6 +80,8 @@ static const char *chgwall[]  = { "/home/hkr/Dropbox/wall_aleatorio.sh", NULL};
 static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "xfce4-screenshooter", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
+static const char *chrocmd[]  = { "chromium-browser", NULL};
+static const char *thunarcmd[]= { "thunar", NULL};
 
 
 #include "toggleview_focus.c"
@@ -97,7 +100,9 @@ static Key keys[] = {
   { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },
   { MODKEY,                       XK_e,      spawn,          {.v = idecmd} },
   { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = foxcmd} },
-  { NULL,                         XK_Print,  spawn,          {.v = printcmd} },
+  { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
+  { 0,                            XK_Print,  spawn,          {.v = printcmd} },
+  { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunarcmd} },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
