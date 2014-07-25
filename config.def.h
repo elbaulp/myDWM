@@ -44,6 +44,7 @@ static const Rule rules[] = {
     { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
     { "Thunar",             NULL,       NULL,       1 << 3,       False,       -1},
     { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
+    { "Parole",             NULL,       NULL,       1 << 6,       False,       -1},
     { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
 };
 
