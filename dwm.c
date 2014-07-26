@@ -318,6 +318,8 @@ static Fnt *fnt;
 static Monitor *mons, *selmon;
 static Window root;
 static Clientlist *cl;
+static unsigned long color_queue[50];
+static char tokens[256][256];
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -885,7 +887,7 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   // TODO move variables that can to main in order to not recreated them
   char *copy = strdup(text);
   char cleanBuf[strlen(text)];
-  memset(cleanBuf, 0, strlen(cleanBuf));
+  cleanBuf[0] = '\0';
 
   char delim[NUMCOLORS+1];
 
@@ -896,7 +898,7 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   delim[NUMCOLORS] = '\0';
 
   char *res = strtok(copy, delim);
-  strcat(tokens[0], res);
+  strcpy(tokens[0], res);
   strcat(cleanBuf, res);
   int i = 1;
 
@@ -907,13 +909,14 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
     color_queue[i-1] = colors[deli];
     res = strtok(0, delim);
     if (res){
-      strcat(tokens[i++], res);
+      strcpy(tokens[i++], res);
       strcat(cleanBuf, res);
     }
   }
   free(copy);
   strncpy(text, cleanBuf, strlen(cleanBuf));
   text[strlen(cleanBuf)] = '\0';
+  color_queue[i] = '\0';
 }
 
 void
@@ -942,13 +945,6 @@ drawbar(Monitor *m) {
 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
 	x += w;
 	xx = x;
-
-  unsigned long color_queue[50];
-  memset(color_queue,0, sizeof(unsigned long) * 50);
-  char tokens[256][256];
-
-  for (int i = 0; i < 256; i++)
-    memset(tokens[i],0,sizeof(char) * 256);
 
 	parsestatus(stext, color_queue, tokens);
 
