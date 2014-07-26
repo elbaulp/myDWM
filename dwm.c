@@ -884,11 +884,6 @@ dirtomon(int dir) {
 void
 parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
 
-  // TODO move variables that can to main in order to not recreated them
-  char *copy = strdup(text);
-  char cleanBuf[strlen(text)];
-  cleanBuf[0] = '\0';
-
   char delim[NUMCOLORS+1];
 
   /* Thanks to http://stackoverflow.com/a/24931903/1612432 */
@@ -897,7 +892,15 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   /* Terminates as string */
   delim[NUMCOLORS] = '\0';
 
+  char *copy = strdup(text);
   char *res = strtok(copy, delim);
+  if (!text[res - copy + strlen(res)]){
+    // Status already parsed
+    return;
+  }
+
+  char cleanBuf[strlen(text)];
+  cleanBuf[0] = '\0';
   strcpy(tokens[0], res);
   strcat(cleanBuf, res);
   int i = 1;
@@ -946,7 +949,7 @@ drawbar(Monitor *m) {
 	x += w;
 	xx = x;
 
-	parsestatus(stext, color_queue, tokens);
+  parsestatus(stext, color_queue, tokens);
 
   w = TEXTW(stext);
   x = m->ww - w;
