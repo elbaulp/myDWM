@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index 875885b..4200317 100644
+index 875885b..c58fe19 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -1,6 +1,16 @@
@@ -8,7 +8,7 @@ index 875885b..4200317 100644
  /* appearance */
 +#define NUMCOLORS 7
 +static const unsigned long colors[] = {
-+    0xbbbbbb,   // \x01
++    0x54ebff,   // \x01
 +    0xdb6794,   // \x02
 +    0xef9c3a,   // \x03
 +    0xa4bc74,   // \x04
@@ -89,7 +89,7 @@ index a5f34e0..043893f 100644
  /* Map functions */
  void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
 diff --git a/dwm.c b/dwm.c
-index ffc8864..2f70c79 100644
+index ffc8864..a86534f 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -232,6 +232,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
@@ -100,16 +100,20 @@ index ffc8864..2f70c79 100644
  
  /* variables */
  static const char broken[] = "broken";
-@@ -691,6 +692,43 @@ dirtomon(int dir) {
+@@ -266,6 +267,8 @@ static Drw *drw;
+ static Fnt *fnt;
+ static Monitor *mons, *selmon;
+ static Window root;
++static unsigned long color_queue[50];
++static char tokens[256][256];
+ 
+ /* configuration, allows nested code to access above variables */
+ #include "config.h"
+@@ -691,6 +694,47 @@ dirtomon(int dir) {
  }
  
  void
 +parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
-+
-+  // TODO move variables that can to main in order to not recreated them
-+  char *copy = strdup(text);
-+  char cleanBuf[strlen(text)];
-+  memset(cleanBuf, 0, strlen(cleanBuf));
 +
 +  char delim[NUMCOLORS+1];
 +
@@ -119,8 +123,16 @@ index ffc8864..2f70c79 100644
 +  /* Terminates as string */
 +  delim[NUMCOLORS] = '\0';
 +
++  char *copy = strdup(text);
 +  char *res = strtok(copy, delim);
-+  strcat(tokens[0], res);
++  if (!text[res - copy + strlen(res)]){
++    // Status already parsed
++    return;
++  }
++
++  char cleanBuf[strlen(text)];
++  cleanBuf[0] = '\0';
++  strcpy(tokens[0], res);
 +  strcat(cleanBuf, res);
 +  int i = 1;
 +
@@ -131,33 +143,25 @@ index ffc8864..2f70c79 100644
 +    color_queue[i-1] = colors[deli];
 +    res = strtok(0, delim);
 +    if (res){
-+      strcat(tokens[i++], res);
++      strcpy(tokens[i++], res);
 +      strcat(cleanBuf, res);
 +    }
 +  }
 +  free(copy);
 +  strncpy(text, cleanBuf, strlen(cleanBuf));
 +  text[strlen(cleanBuf)] = '\0';
++  color_queue[i] = '\0';
 +}
 +
 +void
  drawbar(Monitor *m) {
  	int x, xx, w;
  	unsigned int i, occ = 0, urg = 0;
-@@ -716,13 +754,23 @@ drawbar(Monitor *m) {
+@@ -716,13 +760,14 @@ drawbar(Monitor *m) {
  	x += w;
  	xx = x;
  	if(m == selmon) { /* status is only drawn on selected monitor */
-+
-+    unsigned long color_queue[50];
-+    memset(color_queue, 0, sizeof(unsigned long) * 50);
-+    char tokens[256][256];
-+
-+    for (int i = 0; i < 256; i++)
-+      memset(tokens[i], 0, sizeof(char) * 256);
-+
-+    parsestatus(stext, color_queue, tokens);
-+
++	  parsestatus(stext, color_queue, tokens);
  		w = TEXTW(stext);
  		x = m->ww - w;
  		if(x < xx) {
