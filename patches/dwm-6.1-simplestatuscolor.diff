@@ -89,7 +89,7 @@ index a5f34e0..043893f 100644
  /* Map functions */
  void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
 diff --git a/dwm.c b/dwm.c
-index ffc8864..a86534f 100644
+index ffc8864..cbab319 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -232,6 +232,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
@@ -109,7 +109,7 @@ index ffc8864..a86534f 100644
  
  /* configuration, allows nested code to access above variables */
  #include "config.h"
-@@ -691,6 +694,47 @@ dirtomon(int dir) {
+@@ -691,6 +694,49 @@ dirtomon(int dir) {
  }
  
  void
@@ -127,6 +127,8 @@ index ffc8864..a86534f 100644
 +  char *res = strtok(copy, delim);
 +  if (!text[res - copy + strlen(res)]){
 +    // Status already parsed
++    color_queue[0] = drw_clr_create(drw, normfgcolor)->rgb;
++    strcpy(tokens[0], text);
 +    return;
 +  }
 +
@@ -157,7 +159,7 @@ index ffc8864..a86534f 100644
  drawbar(Monitor *m) {
  	int x, xx, w;
  	unsigned int i, occ = 0, urg = 0;
-@@ -716,13 +760,14 @@ drawbar(Monitor *m) {
+@@ -716,13 +762,14 @@ drawbar(Monitor *m) {
  	x += w;
  	xx = x;
  	if(m == selmon) { /* status is only drawn on selected monitor */
