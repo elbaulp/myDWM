@@ -12,5 +12,8 @@ TODO
 ====
 - Integrate colors with ClrScheme scheme[SchemeLast]
 
+For further reading http://elbauldelprogramador.com/statuscolor-dwm-6-1/
+
+
 ![](./screenshot.png)
 
