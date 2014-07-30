@@ -89,7 +89,7 @@ index a5f34e0..043893f 100644
  /* Map functions */
  void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
 diff --git a/dwm.c b/dwm.c
-index ffc8864..48c4344 100644
+index ffc8864..e704c6e 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -232,6 +232,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
@@ -157,7 +157,7 @@ index ffc8864..48c4344 100644
  drawbar(Monitor *m) {
  	int x, xx, w;
  	unsigned int i, occ = 0, urg = 0;
-@@ -716,13 +760,22 @@ drawbar(Monitor *m) {
+@@ -716,13 +760,15 @@ drawbar(Monitor *m) {
  	x += w;
  	xx = x;
  	if(m == selmon) { /* status is only drawn on selected monitor */
@@ -169,26 +169,8 @@ index ffc8864..48c4344 100644
  			w = m->ww - xx;
  		}
 -		drw_text(drw, x, 0, w, bh, stext, 0);
-+    /* Call drw_colored_st only if status has color characters */
-+    if (color_queue[0] != 0 && tokens[0] != '\0') {
-+      drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
-+    } else {
-+      drw_text(drw, x, 0, w, bh, stext, 0);
-+    }
-+    // Reset for draw status when no color is specified
-+    color_queue[0] = 0;
-+    tokens[0][0] = '\0';
++		drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
++
  	}
  	else
  		x = m->ww;
-@@ -1494,6 +1547,10 @@ setup(void) {
- 	/* clean up any zombies immediately */
- 	sigchld(0);
- 
-+	/* init variables */
-+	color_queue[0] = 0;
-+	tokens[0][0] = '\0';
-+
- 	/* init screen */
- 	screen = DefaultScreen(dpy);
- 	root = RootWindow(dpy, screen);
