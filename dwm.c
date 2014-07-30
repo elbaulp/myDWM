@@ -896,8 +896,6 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   char *res = strtok(copy, delim);
   if (!text[res - copy + strlen(res)]){
     // Status already parsed
-    color_queue[0] = drw_clr_create(drw, normfgcolor)->rgb;
-    strcpy(tokens[0], text);
     return;
   }
 
@@ -965,7 +963,15 @@ drawbar(Monitor *m) {
   }
   xxx = x;
 
-  drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
+  /* Call drw_colored_st only if status has color characters */
+  if (color_queue[0] != 0 && tokens[0] != '\0') {
+    drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
+  } else {
+    drw_text(drw, x, 0, w, bh, stext, 0);
+  }
+  // Reset for draw status when no color is specified
+  color_queue[0] = 0;
+  tokens[0][0] = '\0';
 
 	if((w = xxx - xx) > bh) {
 		x = xx;
@@ -1839,6 +1845,10 @@ setup(void) {
 
 	/* clean up any zombies immediately */
 	sigchld(0);
+
+	/* init variables */
+	color_queue[0] = 0;
+	tokens[0][0] = '\0';
 
 	/* init screen */
 	screen = DefaultScreen(dpy);
