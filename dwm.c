@@ -896,6 +896,8 @@ parsestatus(char *text, unsigned long *color_queue, char tokens[][256]) {
   char *res = strtok(copy, delim);
   if (!text[res - copy + strlen(res)]){
     // Status already parsed
+    color_queue[0] = drw_clr_create(drw, normfgcolor)->rgb;
+    strcpy(tokens[0], text);
     return;
   }
 
