@@ -963,15 +963,7 @@ drawbar(Monitor *m) {
   }
   xxx = x;
 
-  /* Call drw_colored_st only if status has color characters */
-  if (color_queue[0] != 0 && tokens[0] != '\0') {
-    drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
-  } else {
-    drw_text(drw, x, 0, w, bh, stext, 0);
-  }
-  // Reset for draw status when no color is specified
-  color_queue[0] = 0;
-  tokens[0][0] = '\0';
+  drw_colored_st(drw, x, 0, w, bh, tokens, color_queue, stext);
 
 	if((w = xxx - xx) > bh) {
 		x = xx;
@@ -1845,10 +1837,6 @@ setup(void) {
 
 	/* clean up any zombies immediately */
 	sigchld(0);
-
-	/* init variables */
-	color_queue[0] = 0;
-	tokens[0][0] = '\0';
 
 	/* init screen */
 	screen = DefaultScreen(dpy);
