@@ -12,11 +12,11 @@ static const unsigned long colors[] = {
     0xC63333,   // Caution \x07
 };
 static const char font[]            = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" "," "-*-ohsnap.icons-medium-r-normal-*-11-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#444444";
+static const char normbordercolor[] = "#002C91";
 static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#ef9c3a";
-static const char selbordercolor[]  = "#52f799";
-static const char selbgcolor[]      = "#ef9c3a";
+static const char normfgcolor[]     = "#EB6C02";
+static const char selbordercolor[]  = "#1A5FFF";
+static const char selbgcolor[]      = "#EB6C02";
 static const char selfgcolor[]      = "#222222";
 static const char floatnormbordercolor[] = "#885599";
 static const char floatselbordercolor[]  = "#52f799";
