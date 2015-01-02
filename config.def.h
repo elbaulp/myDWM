@@ -78,12 +78,15 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
-static const char *chgwall[]  = { "/home/hkr/Dropbox/wall_aleatorio.sh", NULL};
+static const char *chgwall[]  = { "/home/hkr/Drive/bin/wall_aleatorio.sh", NULL};
 static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "xfce4-screenshooter", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
 static const char *chrocmd[]  = { "chromium-browser", NULL};
 static const char *thunarcmd[]= { "thunar", NULL};
+static const char *upvol[] = { "amixer", "set", "Master", "3+", NULL};
+static const char *downvol[] = { "amixer", "set", "Master", "3-", NULL};
+static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
 
 
 #include "toggleview_focus.c"
@@ -105,6 +108,9 @@ static Key keys[] = {
   { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
   { 0,                            XK_Print,  spawn,          {.v = printcmd} },
   { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunarcmd} },
+  { 0,                            0x1008ff12,spawn,          {.v = mutevol} },
+  { 0,                            0x1008ff11,spawn,          {.v = downvol} },
+  { 0,                            0x1008ff13,spawn,          {.v = upvol} },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -189,4 +195,3 @@ static Button buttons[] = {
   { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
   { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
