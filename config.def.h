@@ -12,13 +12,13 @@ static const unsigned long colors[] = {
     0xC63333,   // Caution \x07
 };
 static const char font[]            = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" "," "-*-ohsnap.icons-medium-r-normal-*-11-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#002C91";
+static const char normbordercolor[] = "#EB6C02";//"#002C91";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#EB6C02";
 static const char selbordercolor[]  = "#1A5FFF";
 static const char selbgcolor[]      = "#EB6C02";
 static const char selfgcolor[]      = "#222222";
-static const char floatnormbordercolor[] = "#885599";
+static const char floatnormbordercolor[] = "#EB6C02";//"#885599";
 static const char floatselbordercolor[]  = "#52f799";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -108,9 +108,9 @@ static Key keys[] = {
   { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
   { 0,                            XK_Print,  spawn,          {.v = printcmd} },
   { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunarcmd} },
-  { 0,                            0x1008ff12,spawn,          {.v = mutevol} },
-  { 0,                            0x1008ff11,spawn,          {.v = downvol} },
-  { 0,                            0x1008ff13,spawn,          {.v = upvol} },
+//  { 0,                            0x1008ff12,spawn,          {.v = mutevol} },
+//  { 0,                            0x1008ff11,spawn,          {.v = downvol} },
+//  { 0,                            0x1008ff13,spawn,          {.v = upvol} },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
