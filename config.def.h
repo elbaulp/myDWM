@@ -43,7 +43,7 @@ static const Rule rules[] = {
     { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
     { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
-    { "Thunar",             NULL,       NULL,       1 << 3,       False,       -1},
+    { "Nemo",               NULL,       NULL,       1 << 3,       False,       -1},
     { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
     { "Parole",             NULL,       NULL,       1 << 6,       False,       -1},
     { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
@@ -83,7 +83,7 @@ static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "xfce4-screenshooter", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
 static const char *chrocmd[]  = { "chromium-browser", NULL};
-static const char *thunarcmd[]= { "nemo --no-desktop", NULL};
+static const char *nemocmd[]= { "nemo", "--no-desktop", NULL};
 //static const char *upvol[] = { "amixer", "set", "Master", "3+", NULL};
 //static const char *downvol[] = { "amixer", "set", "Master", "3-", NULL};
 //static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
@@ -107,7 +107,7 @@ static Key keys[] = {
   { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = foxcmd} },
   { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
   { 0,                            XK_Print,  spawn,          {.v = printcmd} },
-  { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunarcmd} },
+  { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = nemocmd} },
 //  { 0,                            0x1008ff12,spawn,          {.v = mutevol} },
 //  { 0,                            0x1008ff11,spawn,          {.v = downvol} },
 //  { 0,                            0x1008ff13,spawn,          {.v = upvol} },
