@@ -83,10 +83,10 @@ static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "xfce4-screenshooter", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
 static const char *chrocmd[]  = { "chromium-browser", NULL};
-static const char *thunarcmd[]= { "thunar", NULL};
-static const char *upvol[] = { "amixer", "set", "Master", "3+", NULL};
-static const char *downvol[] = { "amixer", "set", "Master", "3-", NULL};
-static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
+static const char *thunarcmd[]= { "nemo --no-desktop", NULL};
+//static const char *upvol[] = { "amixer", "set", "Master", "3+", NULL};
+//static const char *downvol[] = { "amixer", "set", "Master", "3-", NULL};
+//static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
 
 
 #include "toggleview_focus.c"
