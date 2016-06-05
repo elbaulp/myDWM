@@ -40,14 +40,17 @@ static const Rule rules[] = {
   /* class                instance    title       tags mask     isfloating   monitor */
     { "Gimp",               NULL,       NULL,       0,            True,        -1},
     { "Eclipse",            NULL,       NULL,       1 << 0,       False,       -1},
-    { "Chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
+    
+    { "chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
+    { "Epiphany",           NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
+    
     { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
+    
     { "Nemo",               NULL,       NULL,       1 << 3,       False,       -1},
-    { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
-    { "Parole",             NULL,       NULL,       1 << 6,       False,       -1},
-    { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
-    { "Telegram",           NULL,       NULL,       1 << 8,       False,       -1},
+    
+    { "Transmission-gtk",   NULL,       NULL,       1 << 6,       False,       -1},
+    { "Telegram",           NULL,       NULL,       1 << 6,       False,       -1},
 };
 
 /* layout(s) */
