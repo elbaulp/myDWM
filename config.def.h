@@ -47,6 +47,7 @@ static const Rule rules[] = {
     { "mplayer2",           NULL,       NULL,       1 << 6,       False,       -1},
     { "Parole",             NULL,       NULL,       1 << 6,       False,       -1},
     { "Transmission-gtk",   NULL,       NULL,       1 << 8,       False,       -1},
+    { "Telegram",           NULL,       NULL,       1 << 8,       False,       -1},
 };
 
 /* layout(s) */
