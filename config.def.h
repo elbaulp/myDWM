@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+#include <X11/XF86keysym.h>
 /* appearance */
 #define NUMCOLORS 7
 static const unsigned long colors[] = {
@@ -45,9 +45,9 @@ static const Rule rules[] = {
     { "Epiphany",           NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
     
-    { "X-terminal-emulator",NULL,       NULL,       1 << 2,       False,       -1},
+    { "terminator",	    NULL,       NULL,       1 << 2,       False,       -1},
     
-    { "Nemo",               NULL,       NULL,       1 << 3,       False,       -1},
+    { "Thunar",		    NULL,       NULL,       1 << 3,       False,       -1},
     
     { "Transmission-gtk",   NULL,       NULL,       1 << 6,       False,       -1},
     { "Telegram",           NULL,       NULL,       1 << 6,       False,       -1},
@@ -80,17 +80,19 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "x-terminal-emulator", NULL };
-static const char *chgwall[]  = { "/home/hkr/Drive/bin/wall_aleatorio.sh", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-fn", "ohsnap", "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *termcmd[]  = { "terminator", NULL };
+static const char *chgwall[]  = { "/home/hkr/bin/wall_aleatorio.sh", NULL};
 static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "gnome-screenshot", "-i", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
 static const char *chrocmd[]  = { "chromium-browser", NULL};
-static const char *nemocmd[]= { "nemo", "--no-desktop", NULL};
-//static const char *upvol[] = { "amixer", "set", "Master", "3+", NULL};
-//static const char *downvol[] = { "amixer", "set", "Master", "3-", NULL};
-//static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
+static const char *nemocmd[]=   { "thunar", NULL};
+static const char *upvol[] = 	{ "amixer", "set", "Master", "3+", NULL};
+static const char *downvol[] = 	{ "amixer", "set", "Master", "3-", NULL};
+static const char *mutevol[] = 	{ "amixer", "set", "Master", "toggle", NULL};
+static const char *uplight[] =  { "xbacklight", "+1", NULL};
+static const char *downlight[] ={ "xbacklight", "-1", NULL};
 
 
 #include "toggleview_focus.c"
@@ -112,9 +114,11 @@ static Key keys[] = {
   { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
   { 0,                            XK_Print,  spawn,          {.v = printcmd} },
   { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = nemocmd} },
-//  { 0,                            0x1008ff12,spawn,          {.v = mutevol} },
-//  { 0,                            0x1008ff11,spawn,          {.v = downvol} },
-//  { 0,                            0x1008ff13,spawn,          {.v = upvol} },
+  { 0,                            XF86XK_AudioMute,spawn,       {.v = mutevol} },
+  { 0,                            XF86XK_AudioLowerVolume,spawn,{.v = downvol} },
+  { 0,                            XF86XK_AudioRaiseVolume,spawn,{.v = upvol} },
+  { 0,				  XF86XK_MonBrightnessDown,spawn,{.v = downlight} },
+  { 0,                            XF86XK_MonBrightnessUp,spawn,{.v = uplight} },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
