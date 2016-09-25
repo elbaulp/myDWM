@@ -26,7 +26,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const Bool systraypinningfailfirst = True;   /* True: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const Bool showsystray       = True;     /* False means no systray */
-static const Bool showbar           = False;     /* False means no bar */
+static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = False;     /* False means bottom bar */
 
 /* tagging */
@@ -38,19 +38,20 @@ static const Rule rules[] = {
    *  WM_NAME(STRING) = title
    */
   /* class                instance    title       tags mask     isfloating   monitor */
-    { "Gimp",               NULL,       NULL,       0,            True,        -1},
-    { "Eclipse",            NULL,       NULL,       1 << 0,       False,       -1},
+    { "Emacs",              NULL,       NULL,       1 << 0,       False,       -1},
     
     { "chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
     { "Epiphany",           NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
     
-    { "terminator",	    NULL,       NULL,       1 << 2,       False,       -1},
+    { "Terminator",	    NULL,       NULL,       1 << 2,       False,       -1},
     
     { "Thunar",		    NULL,       NULL,       1 << 3,       False,       -1},
+
+    { "vlc",                NULL,       NULL,       1 << 4,       False,       -1},
     
     { "Transmission-gtk",   NULL,       NULL,       1 << 6,       False,       -1},
-    { "Telegram",           NULL,       NULL,       1 << 6,       False,       -1},
+    { "telegram-desktop",   NULL,       NULL,       1 << 6,       False,       -1},
 };
 
 /* layout(s) */
@@ -111,7 +112,7 @@ static Key keys[] = {
   { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },
   { MODKEY,                       XK_e,      spawn,          {.v = idecmd} },
   { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = foxcmd} },
-  { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chrocmd} },
+  { 0,                            XF86XK_Search,spawn,       {.v = chrocmd} },
   { 0,                            XK_Print,  spawn,          {.v = printcmd} },
   { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = nemocmd} },
   { 0,                            XF86XK_AudioMute,spawn,       {.v = mutevol} },
