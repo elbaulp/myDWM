@@ -39,19 +39,14 @@ static const Rule rules[] = {
    */
   /* class                instance    title       tags mask     isfloating   monitor */
     { "Emacs",              NULL,       NULL,       1 << 0,       False,       -1},
-    
     { "chromium-browser",   NULL,       NULL,       1 << 1,       False,       -1},
     { "Epiphany",           NULL,       NULL,       1 << 1,       False,       -1},
     { "Firefox",            NULL,       NULL,       1 << 1,       False,       -1},
-    
     { "Terminator",	    NULL,       NULL,       1 << 2,       False,       -1},
-    
     { "Thunar",		    NULL,       NULL,       1 << 3,       False,       -1},
-
     { "vlc",                NULL,       NULL,       1 << 4,       False,       -1},
-    
     { "Transmission-gtk",   NULL,       NULL,       1 << 6,       False,       -1},
-    { "telegram-desktop",   NULL,       NULL,       1 << 6,       False,       -1},
+    { "TelegramDesktop",    NULL,       NULL,       1 << 6,       False,       -1},
 };
 
 /* layout(s) */
