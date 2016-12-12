@@ -42,7 +42,7 @@ static const Rule rules[] = {
   { "jetbrains-idea",            NULL,       NULL,       1 << 0,       False,       -1},
   { "Chromium-browser-chromium", NULL,       NULL,       1 << 1,       False,       -1},
   { "Terminator",	         NULL,       NULL,       1 << 2,       False,       -1},
-  { "Thunar",		         NULL,       NULL,       1 << 3,       False,       -1},
+  { "Pcmanfm",		         NULL,       NULL,       1 << 3,       False,       -1},
   { "vlc",                       NULL,       NULL,       1 << 4,       False,       -1},
   { "Transmission-gtk",          NULL,       NULL,       1 << 6,       False,       -1},
   { "TelegramDesktop",           NULL,       NULL,       1 << 6,       False,       -1},
@@ -83,7 +83,7 @@ static const char *idecmd[]   = { "/home/hkr/Desarrollo/eclipse/eclipse", NULL};
 static const char *printcmd[] = { "/home/hkr/bin/screenshot.sh", NULL};
 static const char *foxcmd[]   = { "firefox", NULL};
 static const char *chrocmd[]  = { "chromium-browser", NULL};
-static const char *nemocmd[]=   { "thunar", NULL};
+static const char *nemocmd[]=   { "pcmanfm", NULL};
 static const char *upvol[] = 	{ "amixer", "set", "Master", "3+", NULL};
 static const char *downvol[] = 	{ "amixer", "set", "Master", "3-", NULL};
 static const char *mutevol[] = 	{ "amixer", "set", "Master", "toggle", NULL};
