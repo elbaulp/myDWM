@@ -25,6 +25,7 @@ dwmstatus &
 #xinput set-button-map 9 1 2 3 5 4 & # Keyboard in natural scrolling
 1pantalla.sh &
 wmname LG3D &
-xcompmgr -cCfF -D 1 &
+xcompmgr -f -D 2 &
 # transset &
+
 exec dwm
