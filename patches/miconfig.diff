@@ -245,3 +245,16 @@ Index: myDWM/dwm/config.def.h
  	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
  };
 -
+Index: myDWM/dwm/Makefile
+===================================================================
+--- myDWM.orig/dwm/Makefile
++++ myDWM/dwm/Makefile
+@@ -30,7 +30,7 @@ dwm: ${OBJ}
+ 
+ clean:
+ 	@echo cleaning
+-	@rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
++	@rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz config.h
+ 
+ dist: clean
+ 	@echo creating dist tarball
