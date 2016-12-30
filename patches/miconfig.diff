@@ -2,7 +2,13 @@ Index: myDWM/dwm/config.def.h
 ===================================================================
 --- myDWM.orig/dwm/config.def.h
 +++ myDWM/dwm/config.def.h
-@@ -6,17 +6,18 @@ static const unsigned int snap      = 32
+@@ -1,26 +1,24 @@
+ /* See LICENSE file for copyright and license details. */
+-
++#include <X11/XF86keysym.h>
+ /* appearance */
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
  static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
  static const unsigned int systrayspacing = 2;   /* systray spacing */
  static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -19,18 +25,21 @@ Index: myDWM/dwm/config.def.h
 -static const char col_cyan[]        = "#005f87";
 -static const char col_red[]         = "#D7005F";
 +static const char *fonts[]          = { "Ohsnap:size=8:antialias=true:autohint=false" };
-+static const char dmenufont[]       = "Ohsnap:size=8.5:antialias=true:autohint=false";
-+static const char col_gray1[]       = "#EB6C02";
-+static const char col_gray2[]       = "#222222";
-+static const char col_gray3[]       = "#EB6C02";
-+static const char col_gray4[]       = "#1A5FFF";
-+static const char col_cyan[]        = "#EB6C02";
-+static const char col_red[]         = "#222222";
++static const char dmenufont[]       = "Ohsnap:size=8:antialias=true:autohint=false";
++static const char col_orange[]      = "#EB6C02";
++static const char col_gray[]        = "#222222";
++static const char col_gray2[]       = "#262626";
 +
  static const char *colors[][4]      = {
  	/*               fg         bg         border     float */
- 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
-@@ -31,24 +32,15 @@ static const Rule rules[] = {
+-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
+-	[SchemeSel] =  { col_gray4, col_cyan,  col_red,   col_red },
++	[SchemeNorm] = { col_gray,  col_orange,col_gray, col_gray },
++	[SchemeSel] =  { col_orange,col_gray,  col_gray,  col_orange },
+ };
+ 
+ /* tagging */
+@@ -31,24 +29,15 @@ static const Rule rules[] = {
  	 *	WM_CLASS(STRING) = instance, class
  	 *	WM_NAME(STRING) = title
  	 */
@@ -60,20 +69,22 @@ Index: myDWM/dwm/config.def.h
 +        { "Pcmanfm",		       NULL,       NULL,       1 << 3,       False,       -1},
 +        { "vlc",                       NULL,       NULL,       1 << 4,       False,       -1},
 +        { "Transmission-gtk",          NULL,       NULL,       1 << 6,       False,       -1},
-+        { "TelegramDesktop",           NULL,       NULL,       1 << 6,       False,       -1},  
++        { "TelegramDesktop",           NULL,       NULL,       1 << 6,       False,       -1},
  };
  
  /* layout(s) */
-@@ -79,7 +71,16 @@ static const Layout layouts[] = {
+@@ -78,8 +67,17 @@ static const Layout layouts[] = {
+ 
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
- static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 -static const char *termcmd[]  = { "x-terminal-emulator", NULL };
++static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_orange, "-sb", col_orange, "-sf", col_gray, NULL };
 +static const char *termcmd[]  = { "terminator", NULL };
 +static const char *chgwall[]  = { "/home/hkr/bin/wall_aleatorio.sh", NULL};
 +static const char *printcmd[] = { "xsnap", "-nogui", "-filename", "/tmp/snap.png", NULL }; //{ "/home/hkr/bin/screenshot.sh", NULL};
 +static const char *chrocmd[]  = { "chromium-browser", NULL};
-+static const char *fm[]       = { "pcmanfm", NULL};
++static const char *fmcmd[]       = { "pcmanfm", NULL};
 +static const char *upvol[]    = { "amixer", "set", "Master", "3+", NULL};
 +static const char *downvol[]  = { "amixer", "set", "Master", "3-", NULL};
 +static const char *mutevol[]  = { "amixer", "set", "Master", "toggle", NULL};
@@ -82,7 +93,7 @@ Index: myDWM/dwm/config.def.h
  
  #include "toggleview_focus.c"
  #include "moveresize.c"
-@@ -92,76 +93,87 @@ static const char *termcmd[]  = { "x-ter
+@@ -92,76 +90,86 @@ static const char *termcmd[]  = { "x-ter
  #include "focusurgent.c"
  #include "keepfloatingposition.c"
  static Key keys[] = {
@@ -160,11 +171,10 @@ Index: myDWM/dwm/config.def.h
 +       { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 +       { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 +       { MODKEY,                       XK_s,      spawn,          {.v = chgwall} },
-+       { MODKEY,                       XK_e,      spawn,          {.v = idecmd} },
-+       { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = foxcmd} },
++       { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = chrocmd} },
 +       { 0,                            XF86XK_Search,spawn,       {.v = chrocmd} },
 +       { 0,                            XK_Print,  spawn,          {.v = printcmd} },
-+       { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = nemocmd} },
++       { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = fmcmd} },
 +       { 0,                            XF86XK_AudioMute,spawn,       {.v = mutevol} },
 +       { 0,                            XF86XK_AudioLowerVolume,spawn,{.v = downvol} },
 +       { 0,                            XF86XK_AudioRaiseVolume,spawn,{.v = upvol} },
@@ -240,7 +250,7 @@ Index: myDWM/dwm/config.def.h
  };
  
  /* button definitions */
-@@ -180,4 +192,3 @@ static Button buttons[] = {
+@@ -180,4 +188,3 @@ static Button buttons[] = {
  	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
  	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
  };
