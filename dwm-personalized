@@ -27,7 +27,6 @@ xfce4-power-manager &
 wmname LG3D &
 xcompmgr -f -D 2 &
 
-conky -c $HOME/.conky/system-informatics-colors/conkyrc-system-informatics-colors &
-conky -c $HOME/.conky/system-informatics-colors/conkyrc-system-informatics-colors -x 1366 &
+conky &
 
 exec dwm
