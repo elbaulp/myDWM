@@ -26,7 +26,7 @@ xfce4-power-manager &
 1pantalla.sh &
 wmname LG3D &
 xcompmgr -f -D 2 &
-
 conky &
+redshift -c ~/.config/redshift.conf -v &
 
 exec dwm
