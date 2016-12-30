@@ -34,8 +34,8 @@ Index: myDWM/dwm/config.def.h
  	/*               fg         bg         border     float */
 -	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
 -	[SchemeSel] =  { col_gray4, col_cyan,  col_red,   col_red },
-+	[SchemeNorm] = { col_gray,  col_orange,col_gray, col_gray },
-+	[SchemeSel] =  { col_orange,col_gray,  col_gray,  col_orange },
++	[SchemeNorm] = { col_orange,col_gray,  col_gray, col_gray },
++	[SchemeSel] =  { col_gray,  col_orange,col_gray, col_orange },
  };
  
  /* tagging */
