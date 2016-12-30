@@ -1,0 +1,66 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: no URL yet
+This patch is an addition to the single_tagset patch.  It keeps the position of
+a floating client when it's moved to another monitor.  This applies also and
+especially to tags that are displayed on another monitor.
+
+Index: dwm-patches/dwm/dwm.c
+===================================================================
+--- dwm-patches.orig/dwm/dwm.c
++++ dwm-patches/dwm/dwm.c
+@@ -1766,6 +1766,8 @@ showhide(Client *c)
+ 		/* show clients top down */
+ 		XMoveWindow(dpy, c->win, c->x, c->y);
+ 		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
++			if (c->isfloating)
++				keepfloatingposition(c);
+ 			resize(c, c->x, c->y, c->w, c->h, 0);
+ 		showhide(c->snext);
+ 	} else {
+Index: dwm-patches/dwm/keepfloatingposition.c
+===================================================================
+--- /dev/null
++++ dwm-patches/dwm/keepfloatingposition.c
+@@ -0,0 +1,30 @@
++static void
++keepfloatingposition(Client *c) {
++	Monitor *m;
++	int cmmx = c->mon->mx;
++	int cmmy = c->mon->my;
++	int cmmw = c->mon->mw;
++	int cmmh = c->mon->mh;
++	int mmx, mmy;
++	if(!(cmmx <= c->x &&
++			cmmx + cmmw - 1 >= c->x &&
++			cmmy <= c->y &&
++			cmmy + cmmh - 1 >= c->y))
++		for(m = mons; m; m = m->next) {
++			mmx = m->mx;
++			mmy = m->my;
++			if(mmx <= c->x &&
++					mmx + m->mw - 1 >= c->x &&
++					mmy <= c->y &&
++					mmy + m->mh - 1 >= c->y) {
++				c->x = c->x - mmx + cmmx;
++				c->y = c->y - mmy + cmmy;
++				if(c->x + c->w  + 2 * c->bw > cmmx + cmmw - 1)
++					c->x -= c->x + c->w + 2 * c->bw - cmmx - cmmw;
++				if(c->y + c->h + 2 * c->bw > cmmy + cmmh - 1)
++					c->y -= c->y + c->h + 2 * c->bw - cmmy - cmmh;
++				resizeclient(c, c->x, c->y, c->w, c->h);
++				break;
++			}
++		}
++}
+Index: dwm-patches/dwm/config.def.h
+===================================================================
+--- dwm-patches.orig/dwm/config.def.h
++++ dwm-patches/dwm/config.def.h
+@@ -86,6 +86,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "focusmaster.c"
+ #include "shifttags.c"
+ #include "focusurgent.c"
++#include "keepfloatingposition.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },

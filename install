@@ -1,0 +1,2 @@
+#!/bin/sh
+cd "$(dirname "$0")" && ./build && cd dwm && make PREFIX=~/.local install
