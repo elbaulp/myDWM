@@ -28,5 +28,6 @@ wmname LG3D &
 xcompmgr -f -D 2 &
 conky &
 redshift -c ~/.config/redshift.conf -v &
+~/bin/display_date.py &
 
 exec dwm
