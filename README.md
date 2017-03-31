@@ -1,5 +1,4 @@
- This is a personal fork of 
-[jceb/dwm-patches](https://github.com/jceb/dwm-patches)
+> This is a personal fork of [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
 
 # Installation
 
