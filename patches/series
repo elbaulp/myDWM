@@ -36,3 +36,4 @@ clear-layout.patch
 single_tagset_all.patch -p0
 keepfloatingposition.patch
 systray.patch -p0
+miconfig.diff
