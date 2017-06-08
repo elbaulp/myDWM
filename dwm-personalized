@@ -29,5 +29,7 @@ xcompmgr -f -D 2 &
 conky &
 redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
+dnscrypt-proxy /etc/dnscrypt-proxy.conf
+
 
 exec dwm
