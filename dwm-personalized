@@ -12,7 +12,7 @@ xset fp rehash &
 NetworkManager &
 nm-applet &
 
-~/bin/insync-portable/insync-portable start &
+~/bin/insync-bin start &
 
 # transmission-gtk &
 parcellite &
@@ -29,7 +29,5 @@ xcompmgr -f -D 2 &
 conky &
 redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
-dnscrypt-proxy /etc/dnscrypt-proxy.conf
-
 
 exec dwm
