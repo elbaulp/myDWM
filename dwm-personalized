@@ -22,5 +22,6 @@ xcompmgr -f -D 2 &
 conky &
 redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
+/usr/local/bin/1pantalla.sh &
 
 exec dwm
