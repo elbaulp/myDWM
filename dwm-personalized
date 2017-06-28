@@ -14,16 +14,9 @@ nm-applet &
 
 ~/bin/insync-bin start &
 
-# transmission-gtk &
 parcellite &
-#xfce4-volumed &
-#xscreensaver &
 xfce4-power-manager &
 
-#Set status bar & start DWM
-# dwmstatus &
-#xinput set-button-map 9 1 2 3 5 4 & # Keyboard in natural scrolling
-1pantalla.sh &
 wmname LG3D &
 xcompmgr -f -D 2 &
 conky &
