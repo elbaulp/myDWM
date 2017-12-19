@@ -130,8 +130,8 @@ Index: myDWM/dwm/config.def.h
 +static const char *upvol[]      = { "amixer", "set", "Master", "3%+", NULL};
 +static const char *downvol[]    = { "amixer", "set", "Master", "3%-", NULL};
 +static const char *mutevol[]    = { "amixer", "set", "Master", "toggle", NULL};
-+static const char *uplight[]    = { "xbacklight", "-set", "+1", NULL};
-+static const char *downlight[]  = { "xbacklight", "-set", "-1", NULL};
++static const char *uplight[]    = { "xbacklight", "-inc", "1%", NULL};
++static const char *downlight[]  = { "xbacklight", "-dec", "1%", NULL};
  
  #include "toggleview_focus.c"
  #include "moveresize.c"
