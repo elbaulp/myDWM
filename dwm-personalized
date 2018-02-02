@@ -1,7 +1,5 @@
 #!/bin/bash
 
-eval $(cat ~/.fehbg) &
-
 # setting keuboard layout /usr/share/X11/xkb/rules/base.lst
 setxkbmap us intl &
 xbacklight -set 20 &
@@ -24,5 +22,7 @@ redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
 /usr/local/bin/1pantalla.sh &
 mount ~/nextcloud &
+~/.fehbg &
+nmcli radio all off &
 
 exec dwm
