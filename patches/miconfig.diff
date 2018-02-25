@@ -85,7 +85,7 @@ Index: myDWM/dwm/config.def.h
  };
  
  /* layout(s) */
-@@ -59,29 +45,37 @@ static const int resizehints = 1;    /*
+@@ -59,29 +45,38 @@ static const int resizehints = 1;    /*
  #include "gaplessgrid.c"
  #include "clear.c"
  static const Layout layouts[] = {
@@ -128,6 +128,7 @@ Index: myDWM/dwm/config.def.h
 +static const char *printcmd[]   = { "xsnap", "-nogui", "-filename", "/tmp/snap.png", NULL }; //{ "/home/hkr/bin/screenshot.sh", NULL};
 +static const char *firefoxcmd[] = { "firefox", NULL};
 +static const char *fmcmd[]      = { "pcmanfm", NULL};
++static const char *thund[]      = { "thunderbird", NULL};
 +static const char *upvol[]      = { "amixer", "set", "Master", "3%+", NULL};
 +static const char *downvol[]    = { "amixer", "set", "Master", "3%-", NULL};
 +static const char *mutevol[]    = { "amixer", "set", "Master", "toggle", NULL};
@@ -136,7 +137,7 @@ Index: myDWM/dwm/config.def.h
  
  #include "toggleview_focus.c"
  #include "moveresize.c"
-@@ -94,93 +88,101 @@ static const char *termcmd[]  = { "x-ter
+@@ -94,93 +89,103 @@ static const char *termcmd[]  = { "x-ter
  #include "focusurgent.c"
  #include "keepfloatingposition.c"
  static Key keys[] = {
@@ -219,6 +220,8 @@ Index: myDWM/dwm/config.def.h
 +    { 0,                            XF86XK_Search,spawn,       {.v = firefoxcmd} },
 +    { 0,                            XK_Print,  spawn,          {.v = printcmd} },
 +    { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = fmcmd} },
++    { 0,                            XF86XK_Explorer,spawn,     {.v = fmcmd} },
++    { 0,                            XF86XK_Mail, spawn,        {.v = thund} },
 +    { 0,                            XF86XK_AudioMute,spawn,       {.v = mutevol} },
 +    { 0,                            XF86XK_AudioLowerVolume,spawn,{.v = downvol} },
 +    { 0,                            XF86XK_AudioRaiseVolume,spawn,{.v = upvol} },
