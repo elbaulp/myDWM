@@ -8,7 +8,7 @@ Index: dwm-patches/dwm/dwm.c
 ===================================================================
 --- dwm-patches.orig/dwm/dwm.c
 +++ dwm-patches/dwm/dwm.c
-@@ -1764,6 +1764,8 @@ showhide(Client *c)
+@@ -1766,6 +1766,8 @@ showhide(Client *c)
  		/* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
@@ -56,10 +56,10 @@ Index: dwm-patches/dwm/config.def.h
 ===================================================================
 --- dwm-patches.orig/dwm/config.def.h
 +++ dwm-patches/dwm/config.def.h
-@@ -88,6 +88,7 @@ static const char *termcmd[]  = { "x-ter
- #include "focusmaster.c"
+@@ -94,6 +94,7 @@ static const char *termcmd[]  = { "x-ter
  #include "shifttags.c"
  #include "focusurgent.c"
+ #include "clear.c"
 +#include "keepfloatingposition.c"
  static Key keys[] = {
  	/* modifier                     key        function        argument */
