@@ -24,5 +24,12 @@ redshift -c ~/.config/redshift.conf -v &
 mount ~/nextcloud &
 ~/.fehbg &
 nmcli radio all off &
+xinput set-prop 10 274 0 &
+xinput set-prop 10 275 1 &
+xinput set-prop 10 291 1 &
+ntpd -g -q &
+thunderbird &
+keepassxc &
+terminator &
 
 exec dwm
