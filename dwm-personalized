@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # setting keuboard layout /usr/share/X11/xkb/rules/base.lst
+emacs --daemon
 setxkbmap us intl &
 xbacklight -set 20 &
 
@@ -18,7 +19,7 @@ xfce4-power-manager &
 wmname LG3D &
 xcompmgr -f -D 2 &
 conky &
-redshift -c ~/.config/redshift.conf -v &
+#redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
 /usr/local/bin/1pantalla.sh &
 mount ~/nextcloud &
@@ -29,7 +30,9 @@ xinput set-prop 10 275 1 &
 xinput set-prop 10 291 1 &
 ntpd -g -q &
 thunderbird &
-keepassxc &
+#keepassxc &
 terminator &
-
+bin/iris/night_mode.sh &
+xrootconsole -fn "-misc-ohsnap-medium-r-normal-*-*-*-*-*-*-*-*-*" --wrap --bottomup -geometry 100x16+1+1 -bg "#000" -fg "#aca"  --solid /var/log/dnscrypt-proxy/blocked.log &
+emacsclient -c --eval "(org-agenda-list)" "(delete-other-windows)" &
 exec dwm
