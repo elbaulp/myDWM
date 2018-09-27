@@ -1,7 +1,9 @@
 #!/bin/bash
 
+mount /home/hkr/nextcloud/ &
+
 # setting keuboard layout /usr/share/X11/xkb/rules/base.lst
-emacs --daemon
+emacs --daemon &
 setxkbmap us intl &
 xbacklight -set 20 &
 
@@ -33,6 +35,6 @@ thunderbird &
 #keepassxc &
 terminator &
 bin/iris/night_mode.sh &
-xrootconsole -fn "-misc-ohsnap-medium-r-normal-*-*-*-*-*-*-*-*-*" --wrap --bottomup -geometry 100x16+1+1 -bg "#000" -fg "#aca"  --solid /var/log/dnscrypt-proxy/blocked.log &
+xrootconsole -fn "-misc-ohsnap-medium-r-normal-*-*-*-*-*-*-*-*-*" --wrap --bottomup -geometry 100x16+1+1 -bg "#001f3f" -fg "#ffdc00"  --solid /var/log/dnscrypt-proxy/blocked.log &
 emacsclient -c --eval "(org-agenda-list)" "(delete-other-windows)" &
 exec dwm
