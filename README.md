@@ -1,4 +1,4 @@
-> This repo is inpired in [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
+> This repo is inspired in [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
 
 # Installation
 
