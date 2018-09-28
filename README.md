@@ -1,5 +1,8 @@
 > This repo is inspired in [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
 
+# ScreenShot
+![DWM screenshot example](https://raw.githubusercontent.com/elbaulp/myDWM/myConfig/screenshots/ss.png)
+
 # Installation
 
 ## Clone the repo
