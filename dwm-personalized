@@ -3,7 +3,7 @@
 mount /home/hkr/nextcloud/ &
 
 # setting keuboard layout /usr/share/X11/xkb/rules/base.lst
-emacs --daemon &
+emacs --daemon 
 setxkbmap us intl &
 xbacklight -set 20 &
 
