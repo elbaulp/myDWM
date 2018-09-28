@@ -1,14 +1,14 @@
-> This is a personal fork of [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
+> This repo is inpired in [jceb/dwm-patches](https://github.com/jceb/dwm-patches)
 
 # Installation
 
-## clone patches repository including the dwm repository
+## Clone the repo
 
-    git clone https://github.com/jceb/dwm-patches
+    git clone https://github.com/elbaulp/myDWM
 
 ## init and load dwm submodule
 
-    cd dwm-patches
+    cd myDWM
     git submodule update --init --recursive
 
 ## activate all patches, including the personal configuration
@@ -23,32 +23,5 @@
 
 # Patch References
 
-* [attachabove.patch](patches/attachabove.patch)                         (http://dwm.suckless.org/patches/attachabove)
-* [centeredmaster.patch](patches/centeredmaster.patch)                   (http://dwm.suckless.org/patches/centeredmaster)
-* [clear-layout.patch](patches/clear-layout.patch)                       (no URL yet)
-* [float_border_color2.patch](patches/float_border_color2.patch)         (http://dwm.suckless.org/patches/historical/float_border_color)
-* [focusmaster.patch](patches/focusmaster.patch)                         (no URL yet)
-* [focusurgent.patch](patches/focusurgent.patch)                         (http://dwm.suckless.org/patches/focusurgent)
-* [gaplessgrid.patch](patches/gaplessgrid.patch)                         (http://dwm.suckless.org/patches/gapless_grid)
-* [keepfloatingposition.patch](patches/keepfloatingposition.patch)       (no URL yet)
-* [maximize_vert_horz.patch](patches/maximize_vert_horz.patch)           (http://dwm.suckless.org/patches/maximize)
-* [moveresize.patch](patches/moveresize.patch)                           (http://dwm.suckless.org/patches/moveresize)
 * [pertag.patch](patches/pertag.patch)                                   (http://dwm.suckless.org/patches/pertag)
-* [push.patch](patches/push.patch)                                       (http://dwm.suckless.org/patches/push)
-* [restart.patch](patches/restart.patch)                                 (no URL yet)
-* [save_floats.patch](patches/save_floats.patch)                         (http://dwm.suckless.org/patches/historical/save_floats)
-* [shifttags.patch](patches/shifttags.patch)                             (no URL yet)
-* [single_tagset.patch](patches/single_tagset.patch)                     (http://dwm.suckless.org/patches/single_tagset)
-* [single_window_no_border.patch](patches/single_window_no_border.patch) (http://dwm.suckless.org/patches/noborder)
-* [statusallmons.patch](patches/statusallmons.patch)                     (http://dwm.suckless.org/patches/statusallmons)
-* [swapfocus.patch](patches/swapfocus.patch)                             (http://dwm.suckless.org/patches/swapfocus)
 * [systray.patch](patches/systray.patch)                                 (http://dwm.suckless.org/patches/systray)
-* [tagall.patch](patches/tagall.patch)                                   (http://dwm.suckless.org/patches/tagall)
-* [toggleview_focus_client.patch](patches/toggleview_focus_client.patch) (no URL yet)
-* [wm_type_dock.patch](patches/wm_type_dock.patch)                       (no URL yet)
-* [zoomswap.patch](patches/zoomswap.patch)                               (http://dwm.suckless.org/patches/zoomswap)
-
-# Patches, Not Maintained
-
-* [disable_focus_stealing.patch](patches/disable_focus_stealing.patch)   (no URL yet)
-* [raiselower.patch](patches/raiselower.patch)                           (http://dwm.suckless.org/patches/historical/raiselower)
