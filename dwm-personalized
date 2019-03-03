@@ -1,11 +1,8 @@
 #!/bin/bash
 
-mount /home/hkr/nextcloud/ &
-
 # setting keuboard layout /usr/share/X11/xkb/rules/base.lst
-emacs --daemon 
 setxkbmap us intl &
-xbacklight -set 20 &
+xbacklight -set 100% &
 
 xset +fp /usr/share/fonts/local &
 xset fp rehash &
@@ -24,17 +21,17 @@ conky &
 #redshift -c ~/.config/redshift.conf -v &
 ~/bin/display_date.py &
 /usr/local/bin/1pantalla.sh &
-mount ~/nextcloud &
 ~/.fehbg &
 nmcli radio all off &
 xinput set-prop 10 274 0 &
 xinput set-prop 10 275 1 &
-xinput set-prop 10 291 1 &
+xinput set-prop 10 291 0 &
 ntpd -g -q &
 thunderbird &
 #keepassxc &
-terminator &
+guake &
 bin/iris/night_mode.sh &
 xrootconsole -fn "-misc-ohsnap-medium-r-normal-*-*-*-*-*-*-*-*-*" --wrap --bottomup -geometry 100x16+1+1 -bg "#001f3f" -fg "#ffdc00"  --solid /var/log/dnscrypt-proxy/blocked.log &
 emacsclient -c --eval "(org-agenda-list)" "(delete-other-windows)" &
+#nextcloud &
 exec dwm

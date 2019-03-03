@@ -42,8 +42,8 @@ Index: myDWM/dwm/config.def.h
 -	/*               fg         bg         border   */
 -	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 -	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-+static const char *fonts[]          = { "Hack:size=6:antialias=true:autohint=false" };
-+static const char dmenufont[]       = "Hack:size=6:antialias=true:autohint=false";
++static const char *fonts[]          = { "Hack:size=7:antialias=true:autohint=false" };
++static const char dmenufont[]       = "Hack:size=7:antialias=true:autohint=false";
 +static const char col_orange[]      = "#ffdc00";
 +static const char col_gray[]        = "#001f3f";
 +
