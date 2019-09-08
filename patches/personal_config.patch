@@ -116,9 +116,9 @@ Index: myDWM/dwm/config.def.h
 +static const char *termcmd[]    = { "terminator", NULL };
 +static const char *chgwall[]    = { "/home/hkr/bin/wall_aleatorio.sh", NULL};
 +static const char *printcmd[]   = { "xsnap", "-nogui", "-filename", "/tmp/snap.png", NULL }; //{ "/home/hkr/bin/screenshot.sh", NULL};
-+static const char *firefoxcmd[] = { "firefox", NULL};
++static const char *firefoxcmd[] = { "firefox-bin", NULL};
 +static const char *fmcmd[]      = { "pcmanfm", NULL};
-+static const char *thund[]      = { "thunderbird", NULL};
++static const char *thund[]      = { "thunderbird-bin", NULL};
 +static const char *upvol[]      = { "amixer", "set", "Master", "3%+", NULL};
 +static const char *downvol[]    = { "amixer", "set", "Master", "3%-", NULL};
 +static const char *mutevol[]    = { "amixer", "set", "Master", "toggle", NULL};
